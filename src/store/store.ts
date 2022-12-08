@@ -1,4 +1,9 @@
-import { compose, createStore, applyMiddleware, Middleware } from 'redux';
+import {
+  compose,
+  legacy_createStore as createStore,
+  applyMiddleware,
+  Middleware,
+} from 'redux';
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';

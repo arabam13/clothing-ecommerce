@@ -9,6 +9,7 @@ import {
   googleSignInStart,
   emailSignInStart,
 } from '../../store/user/user.action';
+import { useNavigate } from 'react-router-dom';
 
 const defaultFormFields = {
   email: '',
@@ -17,6 +18,7 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -26,6 +28,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     dispatch(googleSignInStart());
+    navigate('/');
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -34,6 +37,7 @@ const SignInForm = () => {
     try {
       dispatch(emailSignInStart(email, password));
       resetFormFields();
+      navigate('/');
     } catch (error) {
       console.log('user sign in failed', error);
     }
@@ -51,27 +55,27 @@ const SignInForm = () => {
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
-          label='Email'
-          type='email'
+          label="Email"
+          type="email"
           required
           onChange={handleChange}
-          name='email'
+          name="email"
           value={email}
         />
 
         <FormInput
-          label='Password'
-          type='password'
+          label="Password"
+          type="password"
           required
           onChange={handleChange}
-          name='password'
+          name="password"
           value={password}
         />
         <ButtonsContainer>
-          <Button type='submit'>Sign In</Button>
+          <Button type="submit">Sign In</Button>
           <Button
             buttonType={BUTTON_TYPE_CLASSES.google}
-            type='button'
+            type="button"
             onClick={signInWithGoogle}
           >
             Sign In With Google

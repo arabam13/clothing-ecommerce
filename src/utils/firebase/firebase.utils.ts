@@ -35,6 +35,7 @@ const firebaseConfig = {
 };
 
 // const firebaseApp = initializeApp(firebaseConfig);
+// console.log(firebaseApp);
 initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
@@ -97,6 +98,7 @@ export const createUserDocumentFromAuth = async (
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
 
+  console.log(userAuth);
   const userDocRef = doc(db, 'users', userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
